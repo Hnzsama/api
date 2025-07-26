@@ -10,29 +10,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit();
 }
 
-// Get current timestamp
-$timestamp = date('Y-m-d H:i:s');
-$timezone = date_default_timezone_get();
-
-// Server information
+// VARIANT 1 - Library Management System
 $server_info = [
-    'status' => 'online',
-    'message' => 'API Server is running successfully',
-    'timestamp' => $timestamp,
-    'timezone' => $timezone,
-    'server' => [
+    'status' => 'active',
+    'service' => 'Library Management API',
+    'message' => 'Service operational and ready',
+    'timestamp' => date('Y-m-d H:i:s'),
+    'timezone' => date_default_timezone_get(),
+    'version' => '1.2.0',
+    'build' => 'LMS-2024-001',
+    'system' => [
         'php_version' => phpversion(),
-        'server_software' => $_SERVER['SERVER_SOFTWARE'] ?? 'Railway',
-        'http_host' => $_SERVER['HTTP_HOST'] ?? 'api-production-a3e6.up.railway.app'
     ],
-    'endpoints' => [
-        'health_check' => '/',
-        'database_config' => '/db_config.php',
-        'actions' => '/action.php'
+    'features' => [
+        'book_management' => 'enabled',
     ]
 ];
-
-// Return JSON response
-http_response_code(200);
-echo json_encode($server_info, JSON_PRETTY_PRINT);
-?>
