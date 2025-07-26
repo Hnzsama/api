@@ -1,9 +1,9 @@
 <?php
     header('Access-Control-Allow-Origin: *');
-    $hostname = "localhost";
+    $hostname = "mysql.railway.internal";
     $username = "root";
-    $password = "";
-    $database = "perpustakaan";
+    $password = "nfmBzAFpIdtfKQJpGRgrKsoSaVSyuRAe";
+    $database = "railway";
     $charset  = "utf8";
     $dsn      = "mysql:host=$hostname;port=3306;dbname=$database;charset=$charset"; 
     $opt      = array(
