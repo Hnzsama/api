@@ -1,16 +1,27 @@
 <?php
+// Set CORS headers
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 
-// Handle preflight OPTIONS request
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+// Handle preflight request
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();
 }
 
-// VARIANT 1 - Library Management System
+// Aktifkan timezone agar tidak error di production
+date_default_timezone_set('Asia/Jakarta'); // ganti sesuai kebutuhan server
+
+// Periksa method yang diizinkan
+if (!in_array($_SERVER['REQUEST_METHOD'], ['GET', 'POST'])) {
+    http_response_code(405); // Method Not Allowed
+    echo json_encode(['error' => 'Method not allowed']);
+    exit();
+}
+
+// Output data
 $server_info = [
     'status' => 'active',
     'service' => 'Library Management API',
@@ -26,3 +37,6 @@ $server_info = [
         'book_management' => 'enabled',
     ]
 ];
+
+http_response_code(200);
+echo json_encode($server_info);
